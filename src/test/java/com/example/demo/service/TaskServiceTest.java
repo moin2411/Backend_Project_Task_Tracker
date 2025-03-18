@@ -75,7 +75,7 @@ class TaskServiceTest {
         task2.setProject(project);
     }
 
-    // ✅ Test Get All Tasks (Admin should get all tasks)
+    //   Test Get All Tasks (Admin should get all tasks)
     @Test
     void testGetAllTasks_AdminGetsAllTasks() {
         when(taskRepository.findAll()).thenReturn(Arrays.asList(task1, task2));
@@ -86,7 +86,7 @@ class TaskServiceTest {
         verify(taskRepository, times(1)).findAll();
     }
 
-    // ✅ Test Get All Tasks (User should only get their own)
+    //   Test Get All Tasks (User should only get their own)
     @Test
     void testGetAllTasks_UserGetsOwnTasks() {
         when(taskRepository.findByUserId(normalUser.getId())).thenReturn(Arrays.asList(task2));
@@ -113,7 +113,7 @@ class TaskServiceTest {
         verify(taskRepository, times(1)).save(any(Task.class));
     }
 
-    // ✅ Test Update Task
+    //   Test Update Task
     @Test
     void testUpdateTask_Success() {
         Task updatedTask = new Task();
@@ -130,7 +130,7 @@ class TaskServiceTest {
         assertEquals("Updated Desc", result.getDescription());
     }
 
-    // ❌ Test Update Task (Task not found)
+    //   Test Update Task (Task not found)
     @Test
     void testUpdateTask_NotFound() {
         when(taskRepository.findById(99L)).thenReturn(Optional.empty());
@@ -138,7 +138,7 @@ class TaskServiceTest {
         assertThrows(EntityNotFoundException.class, () -> taskService.updateTask(99L, new Task()));
     }
 
-    // ✅ Test Delete Task
+    //   Test Delete Task
     @Test
     void testDeleteTask_Success() {
         doNothing().when(taskRepository).deleteById(task1.getId());

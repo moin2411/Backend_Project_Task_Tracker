@@ -44,12 +44,12 @@ class TaskDashboardControllerTest {
         mockUser.setId(1L);
         mockUser.setUsername("testuser");
 
-        // ✅ Mock Project (Fix for NullPointerException)
+        //   Mock Project (Fix for NullPointerException)
         Project mockProject = new Project();
         mockProject.setId(1L);
         mockProject.setName("Test Project");
 
-        // ✅ Mock Task Data with Project
+        //   Mock Task Data with Project
         Task mockTask1 = new Task();
         mockTask1.setId(1L);
         mockTask1.setName("Task 1");
@@ -58,7 +58,7 @@ class TaskDashboardControllerTest {
         mockTask1.setPriority(TaskPriority.HIGH);
         mockTask1.setDueDate(LocalDate.now());
         mockTask1.setUser(mockUser);
-        mockTask1.setProject(mockProject); // ✅ Assign Project
+        mockTask1.setProject(mockProject); //   Assign Project
 
         Task mockTask2 = new Task();
         mockTask2.setId(2L);
@@ -68,7 +68,7 @@ class TaskDashboardControllerTest {
         mockTask2.setPriority(TaskPriority.LOW);
         mockTask2.setDueDate(LocalDate.now());
         mockTask2.setUser(mockUser);
-        mockTask2.setProject(mockProject); // ✅ Assign Project
+        mockTask2.setProject(mockProject); //   Assign Project
 
         mockTaskList = Arrays.asList(
                 new TaskResponseDTO(mockTask1),
@@ -89,7 +89,7 @@ class TaskDashboardControllerTest {
         assertEquals("Task 1", result.get(0).getName());
         assertEquals("Task 2", result.get(1).getName());
 
-        // ✅ FIXED: Corrected assertion to check Project ID instead of Project Name
+        //   FIXED: Corrected assertion to check Project ID instead of Project Name
         assertEquals(1L, result.get(0).getProjectId()); // Project ID is 1
     }
 

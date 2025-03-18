@@ -39,8 +39,6 @@ public class TaskService {
     public List<Task> getTaskForUserOrAdmin(Long id, User user) {
         List<Task> task = taskRepository.findByUserId(id);
         return task;
-              //  .orElseThrow(() -> new RuntimeException("Task not found with id:-" + id));
-
     }
 
 

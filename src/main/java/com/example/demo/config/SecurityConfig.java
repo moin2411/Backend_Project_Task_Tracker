@@ -40,34 +40,35 @@ public class SecurityConfig {
                 .cors(cors -> cors.configurationSource(corsConfigurationSource())) // Enable CORS
                 .csrf(csrf -> csrf.disable()) // Disable CSRF for API
                 .authorizeHttpRequests(auth -> auth
-                .requestMatchers("/h2-console/**").permitAll() //Allow H2 console
-                .requestMatchers("/api/auth/login", "/api/auth/register").permitAll() //Allow login & register
-                
-                //Project related permissions
-                .requestMatchers(HttpMethod.GET, "/api/projects/{id}").hasAnyAuthority("USER", "ADMIN") //Users & Admins can view projects
-                .requestMatchers(HttpMethod.GET, "/api/projects").hasAnyAuthority("USER", "ADMIN") //Users & Admins can list projects
-                .requestMatchers(HttpMethod.POST, "/api/projects").hasAuthority("ADMIN") //Only Admins can create
-                .requestMatchers(HttpMethod.PUT, "/api/projects/{id}").hasAuthority("ADMIN") //Only Admins can update
-                .requestMatchers(HttpMethod.DELETE, "/api/projects/{id}").hasAuthority("ADMIN") //Only Admins can delete
-                
-                //Task permissions (Updated)
-                .requestMatchers(HttpMethod.GET, "/api/tasks/{id}").hasAnyAuthority("USER", "ADMIN") //Users & Admins can view tasks
-                .requestMatchers(HttpMethod.GET, "/api/tasks").hasAnyAuthority("USER", "ADMIN") //Users & Admins can list tasks
-                .requestMatchers(HttpMethod.POST, "/api/tasks").hasAnyAuthority("USER", "ADMIN") //Users & Admins can create tasks
-                .requestMatchers(HttpMethod.PUT, "/api/tasks/{id}").hasAuthority("ADMIN") //Only Admins can update tasks
-                .requestMatchers(HttpMethod.DELETE, "/api/tasks/{id}").hasAuthority("ADMIN") //Only Admins can delete tasks
+                        .requestMatchers("/h2-console/**").permitAll() //Allow H2 console
+                        .requestMatchers("/api/auth/login", "/api/auth/register").permitAll() //Allow login & register
+
+                        //Allow Swagger UI Access
+                        .requestMatchers("/v3/api-docs/**", "/swagger-ui/**", "/swagger-ui.html").permitAll()
+
+                        //Project related permissions
+                        .requestMatchers(HttpMethod.GET, "/api/projects/{id}").hasAnyAuthority("USER", "ADMIN") //Users & Admins can view projects
+                        .requestMatchers(HttpMethod.GET, "/api/projects").hasAnyAuthority("USER", "ADMIN") //Users & Admins can list projects
+                        .requestMatchers(HttpMethod.POST, "/api/projects").hasAuthority("ADMIN") //Only Admins can create
+                        .requestMatchers(HttpMethod.PUT, "/api/projects/{id}").hasAuthority("ADMIN") //Only Admins can update
+                        .requestMatchers(HttpMethod.DELETE, "/api/projects/{id}").hasAuthority("ADMIN") //Only Admins can delete
+
+                        //Task permissions (Updated)
+                        .requestMatchers(HttpMethod.GET, "/api/tasks/{id}").hasAnyAuthority("USER", "ADMIN") //Users & Admins can view tasks
+                        .requestMatchers(HttpMethod.GET, "/api/tasks").hasAnyAuthority("USER", "ADMIN") //Users & Admins can list tasks
+                        .requestMatchers(HttpMethod.POST, "/api/tasks").hasAnyAuthority("USER", "ADMIN") //Users & Admins can create tasks
+                        .requestMatchers(HttpMethod.PUT, "/api/tasks/{id}").hasAuthority("ADMIN") //Only Admins can update tasks
+                        .requestMatchers(HttpMethod.DELETE, "/api/tasks/{id}").hasAuthority("ADMIN") //Only Admins can delete tasks
                         .requestMatchers(HttpMethod.GET, "/api/tasks/getTask").hasAnyAuthority("USER", "ADMIN") //Allow users & admins
 
-                    .anyRequest().authenticated() //Protect all other endpoints
-            )
-            .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-            .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
-            .headers(headers -> headers.frameOptions(frameOptions -> frameOptions.disable())); //Allow H2 Console
+                        .anyRequest().authenticated() //Protect all other endpoints
+                )
+                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+                .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
+                .headers(headers -> headers.frameOptions(frameOptions -> frameOptions.disable())); //Allow H2 Console
 
         return http.build();
     }
-
-
 
     @Bean
     public AuthenticationManager authenticationManager() {
@@ -85,7 +86,7 @@ public class SecurityConfig {
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(Arrays.asList("http://localhost:4200")); // ✅ Allow Angular frontend
+        configuration.setAllowedOrigins(Arrays.asList("http://localhost:4200")); //Allow Angular frontend
         configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         configuration.setAllowedHeaders(Arrays.asList("Authorization", "Content-Type"));
 
@@ -94,4 +95,3 @@ public class SecurityConfig {
         return source;
     }
 }
-

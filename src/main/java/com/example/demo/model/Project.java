@@ -16,7 +16,7 @@ public class Project {
 
     private LocalDate startDate; //Start date of the project
     private LocalDate endDate;   //End date of the project
-    private String status;       //Status of the project (e.g., "Active", "Completed", "On Hold")
+    private String status;       //Status of the project
 
     @OneToMany(mappedBy = "project", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Task> tasks;

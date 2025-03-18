@@ -79,7 +79,7 @@ class TaskControllerTest {
         task.setProject(project);
     }
 
-    // ✅ Test: Create Task (Admin or User)
+    // Test: Create Task (Admin or User)
     @Test
     void testCreateTask_Success() {
         TaskDTO taskDTO = new TaskDTO();
@@ -102,7 +102,7 @@ class TaskControllerTest {
         assertEquals("Sample Task", response.getBody().getName());
     }
 
-    // ✅ Test: Get All Tasks (Admin)
+    //   Test: Get All Tasks (Admin)
     @Test
     void testGetAllTasks_Admin() {
         when(authentication.getName()).thenReturn("admin");
@@ -112,7 +112,7 @@ class TaskControllerTest {
         assertEquals(1, taskController.getAllTasks(authentication).size());
     }
 
-    // ✅ Test: Get All Tasks (User)
+    //   Test: Get All Tasks (User)
     @Test
     void testGetAllTasks_User() {
         when(authentication.getName()).thenReturn("user");
@@ -122,7 +122,7 @@ class TaskControllerTest {
         assertEquals(0, taskController.getAllTasks(authentication).size());
     }
 
-    // ✅ Test: Delete Task (Admin)
+    //   Test: Delete Task (Admin)
     @Test
     void testDeleteTask_Admin() {
         doNothing().when(taskService).deleteTask(1L);

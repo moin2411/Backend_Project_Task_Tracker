@@ -33,7 +33,7 @@ public class Task {
     @JsonIgnore
     private Project project;
 
-    @Version  //Optimistic Locking to prevent concurrent updates
+    @Version  //Optimistic Locking
     private Integer version;
 
     //Default Constructor

@@ -60,7 +60,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                                     .build()
                                     .parseClaimsJws(token)
                                     .getBody();
-                String role = claims.get("role", String.class);  // Extract role from JWT
+                String role = claims.get("role", String.class);  //Extract role from JWT
                 List<GrantedAuthority> authorities = List.of(new SimpleGrantedAuthority(role));
 
                 UsernamePasswordAuthenticationToken authToken =

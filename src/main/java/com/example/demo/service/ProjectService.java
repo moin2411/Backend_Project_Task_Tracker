@@ -23,13 +23,13 @@ public class ProjectService {
         return projectRepository.findAll();
     }
 
-    //Get a project by ID (Fixed: Returns `Project` instead of `Optional<Project>`)
+    //Get a project by ID
     public Project getProjectById(Long id) {
         return projectRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Project not found with id: " + id));
     }
 
-    //Update an existing project (Full update with all fields)
+    //Update an existing project
     public Project updateProject(Long id, Project projectDetails) {
         // Retrieve the project to be updated from the database
         Project project = getProjectById(id); // Uses the method that checks if project exists
@@ -48,7 +48,7 @@ public class ProjectService {
     //Delete a project
     public void deleteProject(Long id) {
         // Check if project exists before deleting
-        Project project = getProjectById(id); // If project not found, an exception will be thrown
+        Project project = getProjectById(id);
         projectRepository.delete(project);
     }
 }

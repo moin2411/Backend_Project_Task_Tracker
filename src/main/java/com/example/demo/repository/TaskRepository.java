@@ -12,7 +12,6 @@ import java.util.List;
 public interface TaskRepository extends JpaRepository<Task, Long> {
 
     //Find tasks by assigned user ID
-//    List<Task> findByUserId(Long userId);
     @Query("SELECT t FROM Task t LEFT JOIN FETCH t.project WHERE t.user.id = :userId")
     List<Task> findByUserId(@Param("userId") Long userId);
 
