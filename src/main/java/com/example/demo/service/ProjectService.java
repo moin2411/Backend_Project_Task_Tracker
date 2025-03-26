@@ -44,7 +44,6 @@ public class ProjectService {
         //Save and return the updated project
         return projectRepository.save(project);
     }
-
     //Delete a project
     public void deleteProject(Long id) {
         // Check if project exists before deleting

@@ -51,7 +51,6 @@ public class AuthController {
         userRepository.save(user);
         return ResponseEntity.ok(Map.of("message", "User registered successfully"));
     }
-
     //User Login API
     @PostMapping("/login")
     public ResponseEntity<?> loginUser(@RequestBody Map<String, String> request) {
@@ -67,7 +66,7 @@ public class AuthController {
                     user.get().getPassword(),
                     user.get().getAuthorities()
             );
-            String token = jwtUtil.generateToken(userDetails); // Generating token
+            String token = jwtUtil.generateToken(userDetails); //Generating token
             Role role = user.get().getRole();
             Long id = user.get().getId();
 

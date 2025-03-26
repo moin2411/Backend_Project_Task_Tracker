@@ -39,7 +39,6 @@ public class ProjectController {
     public Project updateProject(@PathVariable Long id, @RequestBody Project project) {
         return projectService.updateProject(id, project);
     }
-
     @DeleteMapping("/{id}")
     @PreAuthorize("hasAuthority('ADMIN')") //Only Admins can delete projects
     public void deleteProject(@PathVariable Long id) {

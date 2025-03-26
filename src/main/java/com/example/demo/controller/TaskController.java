@@ -56,6 +56,7 @@ public class TaskController {
         taskService.deleteTask(id);
     }
 
+    //Admin and User can create the task
     @PostMapping("/createTask")
     @PreAuthorize("hasAnyAuthority('USER', 'ADMIN')")
     public ResponseEntity<Task> createTask(@RequestBody TaskDTO taskDTO) {

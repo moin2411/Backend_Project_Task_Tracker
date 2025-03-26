@@ -36,7 +36,7 @@ public class Project {
         this.tasks = tasks;
     }
 
-    //Getters & Setters
+    //Getters and Setters
     public Long getId() {
         return id;
     }

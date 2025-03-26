@@ -25,7 +25,7 @@ public class TaskDashboardController {
     @Autowired
     private UserService userService;
 
-    //Users & Admins can view their respective tasks
+    //Users and Admins can view their respective tasks
     @Operation(summary = "Get tasks for the authenticated user", description = "Fetches all tasks associated with the logged-in user.")
     @GetMapping("/getTask")
     @PreAuthorize("hasAnyAuthority('USER', 'ADMIN')")

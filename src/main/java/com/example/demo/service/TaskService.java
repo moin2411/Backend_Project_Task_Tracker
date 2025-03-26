@@ -35,13 +35,7 @@ public class TaskService {
         }
     }
 
-    //Get a specific task (Admins can access all, Users only their own tasks)
-    public List<Task> getTaskForUserOrAdmin(Long id, User user) {
-        List<Task> task = taskRepository.findByUserId(id);
-        return task;
-    }
-
-
+    //Create task
     public Task createTask(Task task, Authentication authentication) {
         //Get the authenticated user
         User user = userService.getUserByUsername(authentication.getName());

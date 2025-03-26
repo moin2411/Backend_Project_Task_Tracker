@@ -27,7 +27,7 @@ public class TaskDTO {
         this.version = version;
     }
 
-    //Getters & Setters
+    //Getters and Setters
     public String getName() {
         return name;
     }
